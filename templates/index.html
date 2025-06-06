@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Retry API</title>
+  <link rel="stylesheet" href="styles.css">
+ 
+</head>
+<body>
+  <div class="box">
+    <h2>💳 Initiate Payment</h2>
+    <form method="POST">
+      <input type="text" name="user" placeholder="Enter username" required />
+      <button type="submit">Pay</button>
+    </form>
+
+    {% if result %}
+      <p><strong>Payment ID:</strong> {{ result.payment_id }}</p>
+      <p><strong>Status:</strong> {{ result.status }}</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>🔍 Check Payment Status</h2>
+    <form method="GET" action="/status">
+      <input type="text" name="payment_id" placeholder="Enter payment ID" required />
+      <button type="submit">Check Status</button>
+    </form>
+
+    {% if status_data %}
+      <p><strong>Status:</strong> {{ status_data.status }}</p>
+      <p><strong>User:</strong> {{ status_data.user }}</p>
+      <div class="logs">
+        <h4>Retry Logs:</h4>
+        <ul>
+        {% for log in status_data.logs %}
+          <li>Attempt {{ log.attempt }} – {{ log.status }} ({{ log.time }})</li>
+        {% endfor %}
+        </ul>
+      </div>
+    {% elif pid %}
+      <p style="color: red;">No record found for Payment ID: {{ pid }}</p>
+    {% endif %}
+  </div>
+</body>
+</html>
