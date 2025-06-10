@@ -22,26 +22,25 @@ A backend microservice that simulates a payment initiation and retry mechanism, 
 Initiates a mock payment.
 
 **Request**:
-```json
+```
 {
   "user": "vaibhavee"
 }
-
+```
 Response:
 
-json
-Copy code
+```
 {
   "payment_id": "uuid...",
   "status": "SUCCESS | FAILED"
 }
-GET /status/<payment_id>
+```
+
+### GET /status/<payment_id>
 Check status and retry logs.
 
-Response:
-
-json
-Copy code
+**Response:**:
+```
 {
   "payment_id": "...",
   "user": "vaibhavee",
@@ -49,11 +48,15 @@ Copy code
   "retries": 2,
   "logs": [...]
 }
-🧪 Run Locally
-bash
-Copy code
-// git clone https://github.com/vaibhaveethorat11/payment-retry-api.git
-// cd payment-retry-api
-pip install flask
-python app.py
-Server will run at http://127.0.0.1:5000
+```
+
+
+
+
+## 🧪 Run Locally
+
+- git clone https://github.com/vaibhaveethorat11/payment-retry-api.git
+- cd payment-retry-api
+- pip install flask
+- python app.py
+- Server will run at http://127.0.0.1:5000
